@@ -13,12 +13,11 @@ overflow:hidden;
 }
 
 #bird{
-height:50px;
-width:50px;
+height:70px;
+width:70px;
 top: 275px;
 left:250px;
 position:absolute;
-background:red;
 }
 
 #obs_frame_down{
@@ -44,61 +43,44 @@ background: green;
 var timer1;
 var ypos = 275;
 var timer2;
-var bird;
-var temp_pos;
-var end_flag =1;
+var pos_flag = 1;
 var pipe_pos = 900;
 
-function drop(){
-timer1 = setInterval(drop_down,5);
+function start(){
+timer1 = setInterval(pos_set,5);
 }
 
-function drop_down(){
-bird = document.getElementById("bird");
-if(ypos <= 550){
-		ypos++;
-		bird.style.top = ypos +"px";
-		}
-		else
-		clearInterval(timer1);
-}
-
-function jump(){
-	if(end_flag ==1){
-		clearInterval(timer1);
-		temp_pos = ypos;
-		timer2 = setInterval(up,5);
-	}
-	else{
-		temp_pos = ypos;
-	}
-}
-
-
-function up(){
-	if((temp_pos - ypos) <= 70){
-		ypos--;
-		bird.style.top = ypos +"px";
-		end_flag = 0;
-		}
-	else{
-		clearInterval(timer2);
-		drop();
-		end_flag = 1;
-		}
-}
-
-function pipe_move(){
+function pos_set(){
+var bird = document.getElementById("bird");
 var pipe = document.getElementById("obs_frame_down");
-var timer3 = setInterval(pipe_run,5);
-	function	pipe_run(){
+		if( ypos <= 530){
+		ypos += pos_flag;
+		bird.style.top = ypos +"px";
+		}
+		else{
+		clearInterval(timer1);
+		}
+		
 		if(pipe_pos >= -900){
 		pipe_pos --;
 		pipe.style.left = pipe_pos + "px";
 		}
-		else
+		else{
 		pipe_pos = -100;
+		}
+}
+
+function up_end(){
+clearTimeout(timer2);
+pos_flag = 1;
+}
+
+function jump(){
+	if (pos_flag == (-1)){
+	clearTimeout(timer2);
 	}
+	pos_flag = (-1);
+	timer2=setTimeout(up_end,300);
 }
 
 </script>
@@ -109,17 +91,32 @@ var timer3 = setInterval(pipe_run,5);
 
 <div id="mainframe">
 
-	<div id="bird"></div>
+	<div id="bird">
+		<img	src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyaxRPNL1N9PQzxflrqXItSFoZRlglDwUefhE2Z_DZhb3fdWcf3Q"	style="height:70px; width:70px; border:0px">
+	</div>
 	<div id="obs_frame_down">
-		<div class="pipe" id="pipe1" style="left:0px"></div>
-		<div class="pipe" id="pipe2" style="left:400px"></div>
-		<div class="pipe" id="pipe3" style="left:800px"></div>
-		<div class="pipe" id="pipe4" style="left:1200px"></div>
-		<div class="pipe" id="pipe5" style="left:1600px"></div>
+		<div class="pipe" id="pipe1" style="left:0px">
+            <img	src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBN-OMvENgEWW4To_gH1eOKXgjmf6DZ9YS8hbvSk1YQac9o1gGFA" style="height:300px; width:100px; border:0px">
+        </div>
+        
+		<div class="pipe" id="pipe2" style="left:400px">
+            <img	src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBN-OMvENgEWW4To_gH1eOKXgjmf6DZ9YS8hbvSk1YQac9o1gGFA" style="height:300px; width:100px; border:0px">
+        </div>
+        
+		<div class="pipe" id="pipe3" style="left:800px">
+        		<img	src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBN-OMvENgEWW4To_gH1eOKXgjmf6DZ9YS8hbvSk1YQac9o1gGFA" style="height:300px; width:100px; border:0px">
+        </div>
+        
+		<div class="pipe" id="pipe4" style="left:1200px">
+        		<img	src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBN-OMvENgEWW4To_gH1eOKXgjmf6DZ9YS8hbvSk1YQac9o1gGFA" style="height:300px; width:100px; border:0px">
+        </div>
+        
+		<div class="pipe" id="pipe5" style="left:1600px">
+        		<img	src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBN-OMvENgEWW4To_gH1eOKXgjmf6DZ9YS8hbvSk1YQac9o1gGFA" style="height:300px; width:100px; border:0px">
+        </div>
 	</div>
 </div>
-<button	type="button"	onclick="drop()">Click here to fly</button>
-<button	type="button"	onclick="jump()">Click here to jump</button>
-<button	type="button"	onclick="pipe_move()">move pipe</button>
+<button	type="button"	onclick="start()">Start</button>
+<button	type="button"	onclick="jump()">Fly</button>
 </body>
 </html>
