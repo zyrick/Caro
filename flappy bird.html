@@ -9,16 +9,35 @@ position:relative;
 height:600px;
 width:900px;
 margin:auto;
+overflow:hidden;
 }
 
 #bird{
 height:50px;
 width:50px;
 top: 275px;
-left:0px;
+left:250px;
 position:absolute;
 background:red;
 }
+
+#obs_frame_down{
+height:10px;
+width:1600px;
+background:white;
+position:absolute;
+left:900px;
+}
+
+.pipe{
+height:300px;
+width:100px;
+top:300px;
+position:absolute;
+background: green;
+}
+
+
 </style>
 
 <script>
@@ -28,6 +47,7 @@ var timer2;
 var bird;
 var temp_pos;
 var end_flag =1;
+var pipe_pos = 900;
 
 function drop(){
 timer1 = setInterval(drop_down,5);
@@ -67,6 +87,20 @@ function up(){
 		end_flag = 1;
 		}
 }
+
+function pipe_move(){
+var pipe = document.getElementById("obs_frame_down");
+var timer3 = setInterval(pipe_run,5);
+	function	pipe_run(){
+		if(pipe_pos >= -900){
+		pipe_pos --;
+		pipe.style.left = pipe_pos + "px";
+		}
+		else
+		pipe_pos = -100;
+	}
+}
+
 </script>
 
 </head>
@@ -76,10 +110,16 @@ function up(){
 <div id="mainframe">
 
 	<div id="bird"></div>
-
+	<div id="obs_frame_down">
+		<div class="pipe" id="pipe1" style="left:0px"></div>
+		<div class="pipe" id="pipe2" style="left:400px"></div>
+		<div class="pipe" id="pipe3" style="left:800px"></div>
+		<div class="pipe" id="pipe4" style="left:1200px"></div>
+		<div class="pipe" id="pipe5" style="left:1600px"></div>
+	</div>
 </div>
 <button	type="button"	onclick="drop()">Click here to fly</button>
 <button	type="button"	onclick="jump()">Click here to jump</button>
-
+<button	type="button"	onclick="pipe_move()">move pipe</button>
 </body>
 </html>
