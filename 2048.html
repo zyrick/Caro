@@ -1,31 +1,4 @@
 
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Marketplace
-    Explore
-
-    @zyrick
-
-0
-0
-
-    0
-
-zyrick/Caro
-Code
-Issues 0
-Pull requests 0
-Projects 0
-Wiki
-Insights
-Settings
-Caro/2048.html
-e74aa36 9 hours ago
-@zyrick zyrick Add files via upload
-104 lines (98 sloc) 2.29 KB
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,12 +6,14 @@ e74aa36 9 hours ago
 .mainframe{
 border: 3px solid green;
 background: white;
-width:840px;
-height:840px;
+width:816px;
+height:816px;
 }
 .box{
 width:200px;
 height:200px;
+float:left;
+border-collapse:collapse;
 margin:auto;
 line-height:200px;
 border:2px solid red;
@@ -82,14 +57,46 @@ var ran_var;
 		}
 	}
 }
-function move_box(){
+
+function move_up(){
 var fnd = 0;
 var sum;
 var flag = 1;
 var box_stt =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	do{
 		flag = 0;
-		for(fnd =15; fnd >=0 ;fnd--){
+		for(fnd = 0; fnd <=15 ;fnd++){
+			if( box_list[fnd] > 0){
+			sum = fnd - 4;
+				if((box_list[fnd] == box_list[sum]) && (box_stt[fnd]==0)){
+					box_stt[sum]=1;
+					box_list[sum] += box_list[fnd]; 
+					box_list[fnd] = 0;
+					display("box"+fnd,box_list[fnd]);
+					display("box"+sum,box_list[sum]);
+					flag = 1;
+				}
+				else if (box_list[sum] == 0){
+					box_list[sum] += box_list[fnd]; 
+					box_list[fnd] = 0;
+					display("box"+fnd,box_list[fnd]);
+					display("box"+sum,box_list[sum]);
+					flag = 1;
+				}
+			}
+		}
+    }while(flag !=0)
+      spawn_box();
+} 
+
+function move_down(){
+var fnd = 0;
+var sum;
+var flag = 1;
+var box_stt =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	do{
+		flag = 0;
+		for(fnd = 15; fnd >=0 ;fnd--){
 			if( box_list[fnd] > 0){
 			sum = fnd +4;
 				if((box_list[fnd] == box_list[sum]) && (box_stt[fnd]==0)){
@@ -112,10 +119,96 @@ var box_stt =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     }while(flag !=0)
       spawn_box();
 } 
+
+function move_left(){
+var fnd = 0;
+var sum;
+var flag = 1;
+var box_stt =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	do{
+		flag = 0;
+		for(fnd = 0; fnd <=15 ;fnd++){
+			if( (box_list[fnd] > 0) && ((fnd%4)!=0)){
+			sum = fnd - 1;
+				if((box_list[fnd] == box_list[sum]) && (box_stt[fnd]==0)){
+					box_stt[sum]=1;
+					box_list[sum] += box_list[fnd]; 
+					box_list[fnd] = 0;
+					display("box"+fnd,box_list[fnd]);
+					display("box"+sum,box_list[sum]);
+					flag = 1;
+				}
+				else if (box_list[sum] == 0){
+					box_list[sum] += box_list[fnd]; 
+					box_list[fnd] = 0;
+					display("box"+fnd,box_list[fnd]);
+					display("box"+sum,box_list[sum]);
+					flag = 1;
+				}
+			}
+		}
+    }while(flag !=0)
+      spawn_box();
+} 
+
+function move_right(){
+var fnd = 0;
+var sum;
+var flag = 1;
+var box_stt =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	do{
+		flag = 0;
+		for(fnd = 15; fnd >=0 ;fnd--){
+			if((box_list[fnd] > 0) && ((fnd%4)!=3)){
+			sum = fnd + 1;
+				if((box_list[fnd] == box_list[sum]) && (box_stt[fnd]==0)){
+					box_stt[sum]=1;
+					box_list[sum] += box_list[fnd]; 
+					box_list[fnd] = 0;
+					display("box"+fnd,box_list[fnd]);
+					display("box"+sum,box_list[sum]);
+					flag = 1;
+				}
+				else if (box_list[sum] == 0){
+					box_list[sum] += box_list[fnd]; 
+					box_list[fnd] = 0;
+					display("box"+fnd,box_list[fnd]);
+					display("box"+sum,box_list[sum]);
+					flag = 1;
+				}
+			}
+		}
+    }while(flag !=0)
+      spawn_box();
+} 
+
+function myKeyPress(event){
+var keynum;
+
+keynum= event.which;
+
+	switch(keynum){
+		case 119:
+			move_up();
+			break;
+		case 97:
+			move_left();
+			break;
+		case 115:
+			move_down();
+			break;
+		case 100:
+			move_right();
+			break;
+		default:
+			break;
+	}
+}
+
 </script>
 </head>
 <body>
-<div class="mainframe">
+<div class="mainframe"	>
 	<div class="box" id="box0">-</div>
 	<div class="box" id="box1">-</div>
 	<div class="box" id="box2">-</div>
@@ -135,22 +228,9 @@ var box_stt =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 </div>
 
-<button type="button" onclick="spawn_box()">Click here </button>
-<button type="button" onclick="move_box()">Move box </button>
+<input type="text" onkeypress="return myKeyPress(event)" />
+
 </body>
 </html>
 
-    © 2017 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Help
-
-    Contact GitHub
-    API
-    Training
-    Shop
-    Blog
-    About
 
