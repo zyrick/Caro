@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#mainframe{
+background: white;
+border:3px solid yellow;
+position:relative;
+height:600px;
+width:900px;
+margin:auto;
+}
+
+#bird{
+height:50px;
+width:50px;
+top: 275px;
+left:0px;
+position:absolute;
+background:red;
+}
+</style>
+
+<script>
+var timer1;
+var ypos = 275;
+var timer2;
+var bird;
+var temp_pos;
+var end_flag =1;
+
+function drop(){
+timer1 = setInterval(drop_down,5);
+}
+
+function drop_down(){
+bird = document.getElementById("bird");
+if(ypos <= 550){
+		ypos++;
+		bird.style.top = ypos +"px";
+		}
+		else
+		clearInterval(timer1);
+}
+
+function jump(){
+	if(end_flag ==1){
+		clearInterval(timer1);
+		temp_pos = ypos;
+		timer2 = setInterval(up,5);
+	}
+	else{
+		temp_pos = ypos;
+	}
+}
+
+
+function up(){
+	if((temp_pos - ypos) <= 70){
+		ypos--;
+		bird.style.top = ypos +"px";
+		end_flag = 0;
+		}
+	else{
+		clearInterval(timer2);
+		drop();
+		end_flag = 1;
+		}
+}
+</script>
+
+</head>
+
+<body>
+
+<div id="mainframe">
+
+	<div id="bird"></div>
+
+</div>
+<button	type="button"	onclick="drop()">Click here to fly</button>
+<button	type="button"	onclick="jump()">Click here to jump</button>
+
+</body>
+</html>
