@@ -12,8 +12,8 @@ height:816px;
 .box{
 width:200px;
 height:200px;
-float:left;
 border-collapse:collapse;
+float:left;
 margin:auto;
 line-height:200px;
 border:2px solid red;
@@ -22,6 +22,7 @@ color:black;
 display:inline-block;
 text-align:center;
 font-size:50px;
+border-radius:20px;
 }
 </style>
 <script>
@@ -35,9 +36,45 @@ switch (value){
 	box_set.innerHTML = '-';
 	box_set.style.backgroundColor = "white";
 	break;
+	
+	case 2:
+	box_set.innerHTML = value;
+	box_set.style.backgroundColor = "rgb(0,255,255)";
+	break;
+	
+	case 4:
+	box_set.innerHTML = value;
+	box_set.style.backgroundColor = "rgb(0,230,230)";
+	break;
+	
+	case 8:
+	box_set.innerHTML = value;
+	box_set.style.backgroundColor = "rgb(255,255,0)";
+	break;
+	
+	case 16:
+	box_set.innerHTML = value;
+	box_set.style.backgroundColor = "rgb(230,230,0)";
+	break;
+	
+	case 32:
+	box_set.innerHTML = value;
+	box_set.style.backgroundColor = "rgb(255,0,255)";
+	break;
+	
+	case 64:
+	box_set.innerHTML = value;
+	box_set.style.backgroundColor = "rgb(230,0,230)";
+	break;
+	
+	case 128:
+	box_set.innerHTML = value;
+	box_set.style.backgroundColor = "rgb(170,170,255)";
+	break;
+	
 	default:
 	box_set.innerHTML = value;
-	box_set.style.backgroundColor = "rgb(0,240,240)";
+	box_set.style.backgroundColor = "rgb(170,165,230)";
 	break;
 	}
 }
@@ -233,4 +270,17 @@ keynum= event.which;
 </body>
 </html>
 
+    © 2017 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    API
+    Training
+    Shop
+    Blog
+    About
 
