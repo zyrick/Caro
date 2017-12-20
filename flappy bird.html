@@ -16,7 +16,7 @@ overflow:hidden;
 height:70px;
 width:70px;
 top: 275px;
-left:250px;
+left:200px;
 position:absolute;
 }
 
@@ -48,7 +48,7 @@ function init()
 {
 var i = 0;
 	for(i=0; i<12; i++){
-	pipe_array[i] = (Math.floor(Math.random()*200) + 200);
+	pipe_array[i] = (Math.floor(Math.random()*200) + 100);
 	height_set(i);
 	}
 }
@@ -117,6 +117,30 @@ var pipe = document.getElementById("frame_down");
 		ypos += pos_flag;
 		bird.style.top = ypos +"px";
 		}
+		
+		if((pipe_pos > 100) && (pipe_pos <270)){
+		if((ypos < (420 - pipe_array[0])) || (ypos > (530 - pipe_array[0])) ){
+			alert("SH!T");
+			}
+		}		
+		
+		if((pipe_pos > -300) && (pipe_pos < -130)){
+		if((ypos < (420 - pipe_array[1])) || (ypos > (530 - pipe_array[1])) ){
+			alert("SH!T");
+			}
+		}	
+		
+		if((pipe_pos > -700) && (pipe_pos < -530)){
+		if((ypos < (420 - pipe_array[2])) || (ypos > (530 - pipe_array[2])) ){
+			alert("SH!T");
+			}
+		}	
+		
+		if((pipe_pos > -1100) && (pipe_pos < -930)){
+		if((ypos < (420 - pipe_array[3])) || (ypos > (530 - pipe_array[3])) ){
+			alert("SH!T");
+			}
+		}	
 }
 
 function up_end(){
@@ -130,8 +154,8 @@ function jump(){
 	if (pos_flag == (-1)){
 	clearTimeout(timer2);
 	}
-	pos_flag = (-1);
-	timer2=setTimeout(up_end,300);
+	pos_flag = (-1.5);
+	timer2=setTimeout(up_end,250);
 }
 
 </script>
@@ -140,12 +164,12 @@ function jump(){
 
 <body>
 
-<div id="mainframe">
+<div id="mainframe" onclick="jump()">
 
 	<div id="bird">
 		<img	src="file:///C:/Users/anle2/Desktop/Web%20programming/Angry%20bird.png"	style="height:70px; width:70px; border:0px">
 	</div>
-	<div class="obs_frame" id="frame_down">
+	<div class="obs_frame" id="frame_down" onclick="jump()">
 		<div class="pipe" id="pipe0" style="left:0px">
             <img id="imp0"	src="file:///C:/Users/anle2/Desktop/Web%20programming/Pipe.jpg" style=" width:100px; border:0px">
         </div>
